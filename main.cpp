@@ -5,24 +5,38 @@
 #include "jarmu.h"
 #include "vizijarmu.hpp"
 #include "foldijarmu.hpp"
+#include "limits"
+
+using namespace std;
 
 int mainMenu()
 {
     int choice = 0;
     int numOfOptions = 4;
-    std::cout << "Valasszon egy lehetoseget: ";
-    std::cout << "1. Jarmu hozzaadasa" << std::endl;
-    std::cout << "2. Jarmu torlese" << std::endl;
-    std::cout << "3. Jarmu megjelenitese" << std::endl;
-    std::cout << "4. Kereskedes vege" << std::endl;
-    while (choice < 1 || choice > numOfOptions)
+    cout << "1. Jarmu hozzaadasa" << endl;
+    cout << "2. Jarmu torlese" << endl;
+    cout << "3. Minden jarmu megjelenitese" << endl;
+    cout << "4. Kereskedes vege" << endl;
+
+    bool valid = false;
+
+    do
     {
-        std::cin >> choice;
-        if (choice < 1 || choice > numOfOptions)
-            std::cout << "Nem jo valasztas!" << std::endl;
+        cout << "Valasszon egy lehetoseget: ";
+        cin >> choice;
+        if (cin.good() && choice >= 1 && choice <= numOfOptions)
+        {
+            valid = true;
+        }
         else
-            break;
-    }
+        {
+            cout << "Hibas valasztas! Probalja ujra!" << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+    } while (!valid);
+
     return choice;
 }
 
