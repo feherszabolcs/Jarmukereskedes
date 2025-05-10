@@ -30,30 +30,6 @@ public:
     /// @return pinter egy '\0'-val lezárt (C) sztringre
     const char *c_str() const { return pData; }
 
-    // Slice helper a jarmuvek beolvasásához == FIX SIZE == 10
-    String *slice(String line, char sep = ';')
-    {
-        static String res[10];
-        size_t j = 0;
-        String temp = "";
-        std::cout << "line: " << line.c_str() << std::endl;
-        std::cout << "line size: " << line.size() << std::endl;
-        for (size_t i = 0; i < line.size(); i++)
-        {
-            if (line[i] == sep)
-            {
-                res[j] = temp;
-                j++;
-                temp = "";
-            }
-            else
-            {
-                temp = temp + line[i];
-            }
-        }
-        return res;
-    }
-
     /// Konstruktor egy char karakterből
     /// @param ch - karakter
     String(char ch);
@@ -88,6 +64,8 @@ public:
     /// @param rhs_s - jobboldali String
     /// @return új String, ami tartalmazza a két stringet egmás után
     String operator+(const String &rhs_s) const;
+
+    String *slice(String line, char sep);
 
     bool operator==(const String &rhs_s) const;
     bool operator==(const char *rhs_c) const { return *this == String(rhs_c); }

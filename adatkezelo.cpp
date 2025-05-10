@@ -20,8 +20,12 @@ void Adatkezelo<capacity>::addJarmu(Jarmu *ujJarmu)
     {
         for (size_t i = 0; i < capacity; i++)
         {
-            if (jarmuvek[i] == nullptr)
-                jarmuvek[i] = ujJarmu;
+            // if (jarmuvek[i] == nullptr)
+            // {
+            jarmuvek[i] = ujJarmu;
+            jarmuvekSzama++;
+            break;
+            // }
         }
     }
 
@@ -49,6 +53,8 @@ void Adatkezelo<capacity>::printJarmuvek() const
         std::cout << "Nincs megjelenitheto jarmu!" << std::endl;
         return;
     }
+    else
+        std::cout << "---Jarmuvek:--- (" << jarmuvekSzama << " db)" << std::endl;
     for (size_t i = 0; i < jarmuvekSzama; i++)
     {
         if (jarmuvek[i] != nullptr)

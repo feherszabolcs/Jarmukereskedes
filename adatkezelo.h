@@ -26,5 +26,10 @@ public:
     // szűrő fgv. paramok alapján
     void filterJarmuvek();
     bool toFile(const char *filename) const; // bool return value: sikeres-e a mentés
+    ~Adatkezelo()
+    {
+        for (size_t i = 0; i < capacity; ++i)
+            delete jarmuvek[i];
+    }
 };
 #endif

@@ -30,6 +30,16 @@ public:
         this->ar = ar;
         this->teljesitmeny = teljesitmeny;
     }
+    Jarmu(String line)
+    {
+        String *temp = line.slice(line, ';');
+        this->id = atoi(temp[0].c_str());
+        this->megnevezes = temp[1];
+        this->gyartasiEv = atoi(temp[2].c_str());
+        this->szin = temp[3];
+        this->ar = atoi(temp[4].c_str());
+        this->teljesitmeny = atof(temp[5].c_str());
+    };
     int getId() const { return id; }
     String getMegnevezes() const { return megnevezes; }
     int getEv() const { return gyartasiEv; }
@@ -38,6 +48,7 @@ public:
     void setAr(int ar) { this->ar = ar; }
     int getTeljesitmeny() const { return teljesitmeny; }
     virtual void print() const
+
     {
         std::cout << "ID: " << id << "; ";
         std::cout << "Megnevezes: " << megnevezes << "; ";
@@ -46,5 +57,6 @@ public:
         std::cout << "Ar: " << ar << "; ";
         std::cout << "Teljesitmeny: " << teljesitmeny << "; ";
     };
+    virtual ~Jarmu() {}
 };
 #endif

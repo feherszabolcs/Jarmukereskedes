@@ -79,8 +79,9 @@ Adatkezelo<20> init()
                 String line;
                 while (readLine(file, line))
                 {
-                    cout << line << endl;
+                    ker.addJarmu(new FoldiJarmu(line));
                 }
+                valid = 1;
             }
             else
             {
