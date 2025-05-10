@@ -27,7 +27,7 @@ public:
         Jarmu::print();
         std::cout << "Rendszam: " << rendszam << "; ";
         std::cout << "Ajtok szama: " << ajtokSzama << "; ";
-        std::cout << "Uzemanyag fogyasztas: " << uzemanyagFogyasztas << "; " << std::endl;
+        std::cout << "Uzemanyag fogyasztas: " << uzemanyagFogyasztas << " l/100km " << std::endl;
     }
 };
 #endif

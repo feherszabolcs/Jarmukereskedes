@@ -37,8 +37,8 @@ public:
         this->megnevezes = temp[1];
         this->gyartasiEv = atoi(temp[2].c_str());
         this->szin = temp[3];
-        this->ar = atoi(temp[4].c_str());
-        this->teljesitmeny = atof(temp[5].c_str());
+        this->ar = atoi(temp[5].c_str());
+        this->teljesitmeny = atof(temp[4].c_str());
     };
     int getId() const { return id; }
     String getMegnevezes() const { return megnevezes; }
@@ -54,8 +54,8 @@ public:
         std::cout << "Megnevezes: " << megnevezes << "; ";
         std::cout << "Gyartasi ev: " << gyartasiEv << "; ";
         std::cout << "Szin: " << szin << "; ";
-        std::cout << "Ar: " << ar << "; ";
-        std::cout << "Teljesitmeny: " << teljesitmeny << "; ";
+        std::cout << "Ar: " << ar << " ezer Ft; ";
+        std::cout << "Teljesitmeny: " << teljesitmeny << " kW; ";
     };
     virtual ~Jarmu() {}
 };
