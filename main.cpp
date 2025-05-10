@@ -81,7 +81,6 @@ Adatkezelo<20> init()
                 {
                     cout << line << endl;
                 }
-                valid = 1;
             }
             else
             {
