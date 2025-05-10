@@ -88,7 +88,10 @@ Adatkezelo<20> init()
                 String line;
                 while (readLine(file, line))
                 {
-                    ker.addJarmu(new FoldiJarmu(line));
+                    if (line.slice(line, ';')[7] == "-")
+                        ker.addJarmu(new FoldiJarmu(line));
+                    else
+                        ker.addJarmu(new Vizijarmu(line));
                 }
                 valid = 1;
                 std::cout << "Sikeresen betoltve! - " << filename.toUpper() << std::endl;
@@ -99,7 +102,8 @@ Adatkezelo<20> init()
                 valid = -1;
             }
         }
-        if (cin.good() && (toupper(load) == 'N')){
+        if (cin.good() && (toupper(load) == 'N'))
+        {
             valid = 0;
             cout << "Nem kerult betoltesre fajl!" << endl;
         }

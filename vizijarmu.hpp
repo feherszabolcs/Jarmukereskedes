@@ -10,6 +10,11 @@ private:
 public:
     Vizijarmu(int id, String megnevezes, int gyartasiEv, String szin, int ar, double teljesitmeny, String besorolas) : Jarmu(id, megnevezes, gyartasiEv, szin, ar, teljesitmeny), besorolas(besorolas) {}
     Vizijarmu(const Vizijarmu &vizijarmu) : Jarmu(vizijarmu), besorolas(vizijarmu.besorolas) {}
+    Vizijarmu(String line) : Jarmu(line)
+    {
+        String *temp = line.slice(line, ';');
+        this->besorolas = temp[7];
+    }
     String getBesorolas() const { return besorolas; }
     void print() const
     {
