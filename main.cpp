@@ -6,8 +6,26 @@
 #include "vizijarmu.hpp"
 #include "foldijarmu.hpp"
 #include "limits"
+#include <fstream>
+#include <string>
 
 using namespace std;
+
+istream &readLine(istream &is, String &result)
+{
+    char ch;
+    result = "";
+    while (is.get(ch))
+    {
+        if (ch == '\n')
+            continue;
+        if (ch == '|')
+            break;
+        else
+            result = result + ch;
+    }
+    return is;
+}
 
 int mainMenu()
 {
@@ -16,7 +34,7 @@ int mainMenu()
     cout << "1. Jarmu hozzaadasa" << endl;
     cout << "2. Jarmu torlese" << endl;
     cout << "3. Minden jarmu megjelenitese" << endl;
-    cout << "4. Kereskedes vege" << endl;
+    cout << "4. Kilepes" << endl;
 
     bool valid = false;
 
@@ -40,7 +58,61 @@ int mainMenu()
     return choice;
 }
 
+Adatkezelo<20> init()
+{
+    cout << "---JARMUKERESKEDES---" << endl;
+    char load;
+    int valid = -1;
+    Adatkezelo<20> ker;
+    do
+    {
+        cout << "Szeretne betolteni foldi elmentett jarmuveit? [I]-Igen [N]-Nem: ";
+        cin >> load;
+        if (cin.good() && (load == 'I'))
+        {
+            String filename;
+            cout << "Kerem adja meg a betolteni kivant fajl nevet: ";
+            cin >> filename;
+            ifstream file(filename.c_str());
+            if (file.is_open())
+            {
+                String line;
+                while (readLine(file, line))
+                {
+                    cout << line << endl;
+                }
+                valid = 1;
+            }
+            else
+            {
+                cout << "A fajl nem nyithato meg!" << endl;
+                valid = -1;
+            }
+        }
+        if (cin.good() && (load == 'N'))
+            valid = 0;
+    } while (valid < 0);
+    return ker;
+}
+
 int main()
 {
+    // adatkezelo capacity kezdeti meretenek megadasa?
+    Adatkezelo<20> kereskedes = init();
+
     int choice = mainMenu();
+    switch (choice)
+    {
+    case 1:
+        /* code */
+        break;
+    case 3:
+        kereskedes.printJarmuvek();
+        break;
+    case 4:
+        cout << "Kilepes!" << endl;
+
+    default:
+        break;
+    }
 }

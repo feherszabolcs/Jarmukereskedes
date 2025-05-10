@@ -75,6 +75,11 @@ const char& String::operator[](unsigned int idx) const {
     return pData[idx];
 }
 
+bool String::operator==(const String& rhs_s) const {
+    if (len != rhs_s.len) return false;
+    return (strcmp(pData, rhs_s.pData) == 0);
+}
+
 // + operátor, ami két stringet ad össze (concatString)
 String String::operator+(const String& rhs_s) const {
     String temp;		// ide kerül az eredmény

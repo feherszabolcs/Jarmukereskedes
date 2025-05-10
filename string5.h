@@ -13,16 +13,14 @@
  * A pData-ban vannak a karakterek (a lezáró nullával együtt),
  * len a hossz.A hosszba nem számít bele a lezáró nulla.
  */
-class String {
-    char *pData;    ///< pointer az adatra
-    size_t len;     ///< hossz lezáró nulla nélkül
+class String
+{
+    char *pData; ///< pointer az adatra
+    size_t len;  ///< hossz lezáró nulla nélkül
 public:
-
-
     /// Hossz lekérdezése.
     /// @return Sztring hossza
-	size_t size() const { return len; }
-
+    size_t size() const { return len; }
 
     /// Default konstruktor
     /// String() :pData(0), len(0) {}
@@ -30,7 +28,7 @@ public:
 
     /// C-sztringet ad vissza
     /// @return pinter egy '\0'-val lezárt (C) sztringre
-    const char* c_str() const { return pData;}
+    const char *c_str() const { return pData; }
 
     /// Konstruktor egy char karakterből
     /// @param ch - karakter
@@ -43,7 +41,7 @@ public:
 
     /// Másoló konstruktor
     /// @param s1 - String, amiből létrehozzuk az új String-et
-    String(const String& s1);
+    String(const String &s1);
 
     /// Destruktor
     virtual ~String() { delete[] pData; }
@@ -51,7 +49,8 @@ public:
     /// Kiírunk egy Stringet (debug célokra)
     /// Előtte kiírunk egy tetszőleges szöveget.
     /// @param txt - nullával lezárt szövegre mutató pointer
-    void printDbg(const char *txt = "") const {
+    void printDbg(const char *txt = "") const
+    {
         std::cout << txt << "[" << len << "], "
                   << (pData ? pData : "(NULL)") << std::endl;
     }
@@ -59,29 +58,34 @@ public:
     /// Értékadó operátor.
     /// @param rhs_s - jobboldali String
     /// @return baoldali (módosított) string (referenciája)
-    String& operator=(const String& rhs_s);
+    String &operator=(const String &rhs_s);
 
     /// Két Stringet összefűz
     /// @param rhs_s - jobboldali String
     /// @return új String, ami tartalmazza a két stringet egmás után
-    String operator+(const String& rhs_s) const ;
+    String operator+(const String &rhs_s) const;
+
+    bool operator==(const String &rhs_s) const;
+    bool operator==(const char *rhs_c) const { return *this == String(rhs_c); }
+    bool operator!=(const String &rhs_s) const { return !(*this == rhs_s); }
+    bool operator!=(const char *rhs_c) const { return !(*this == String(rhs_c)); }
 
     /// Sztrinhez karaktert összefűz
     /// @param rhs_c - jobboldali karakter
     /// @return új String, ami tartalmazza a sztringet és a karaktert egymás után
-    String operator+(char rhs_c) const { return *this + String(rhs_c);}
+    String operator+(char rhs_c) const { return *this + String(rhs_c); }
 
     /// A string egy megadott indexű elemének REFERENCIÁJÁVAL tér vissza.
     /// @param idx - charakter indexe
     /// @return karakter (referencia)
     ///         Indexelési hiba esetén const char* kivételt dob.
-    char& operator[](unsigned int idx);
+    char &operator[](unsigned int idx);
 
     /// A string egy megadott indexű elemének REFERENCIÁJÁVAL tér vissza.
     /// @param idx - karakter indexe
     /// @return karakter (referencia)
     ///         Indexelési hiba esetén const char* kivételt dob (assert helyett).
-    const char& operator[](unsigned int idx) const;
+    const char &operator[](unsigned int idx) const;
 };
 
 /// Globális függvények:
@@ -89,18 +93,18 @@ public:
 /// @param os - ostream típusú objektum
 /// @param s0 - String, amit kiírunk
 /// @return os
-std::ostream& operator<<(std::ostream& os, const String& s0);
+std::ostream &operator<<(std::ostream &os, const String &s0);
 
 /// Beolvas az istream-ről egy szót egy string-be.
 /// @param is - istream típusú objektum
 /// @param s0 - String, amibe beolvas
 /// @return is
-std::istream& operator>>(std::istream& is, String& s0);
+std::istream &operator>>(std::istream &is, String &s0);
 
 /// Karakterhez sztringet fűz
 /// @param ch - karakter
 /// @param str - String
 /// @return új String, ami tartalmazza a karaktert és a sztringet egymás után
-inline String operator+(char ch, const String& str) { return String(ch) + str; }
+inline String operator+(char ch, const String &str) { return String(ch) + str; }
 
 #endif

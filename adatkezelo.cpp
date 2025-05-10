@@ -17,7 +17,14 @@ void Adatkezelo<capacity>::addJarmu(Jarmu *ujJarmu)
         throw "Nincs hely a kereskedesben uj jarmunek!";
     }
     if (ujJarmu != nullptr)
-        jarmuvek[jarmuvekSzama++] = ujJarmu;
+    {
+        for (size_t i = 0; i < capacity; i++)
+        {
+            if (jarmuvek[i] == nullptr)
+                jarmuvek[i] = ujJarmu;
+        }
+    }
+
     else
         throw "Hiba tortent!";
 }
@@ -28,6 +35,25 @@ void Adatkezelo<capacity>::removeJarmu(int id)
     {
         if ((jarmuvek[i])->getId() == id)
         {
+            jarmuvek[i] = nullptr;
+            jarmuvekSzama--;
+            break;
+        }
+    }
+}
+template <size_t capacity>
+void Adatkezelo<capacity>::printJarmuvek() const
+{
+    if (jarmuvekSzama == 0)
+    {
+        std::cout << "Nincs megjelenitheto jarmu!" << std::endl;
+        return;
+    }
+    for (size_t i = 0; i < jarmuvekSzama; i++)
+    {
+        if (jarmuvek[i] != nullptr)
+        {
+            jarmuvek[i]->print();
         }
     }
 }

@@ -15,5 +15,12 @@ public:
     String getRendszam() const { return rendszam; }
     int getAjtokSzama() const { return ajtokSzama; }
     int getUzemanyagFogyasztas() const { return uzemanyagFogyasztas; }
+    void print() const
+    {
+        Jarmu::print();
+        std::cout << "Rendszam: " << rendszam << "; ";
+        std::cout << "Ajtok szama: " << ajtokSzama << "; ";
+        std::cout << "Uzemanyag fogyasztas: " << uzemanyagFogyasztas << "; ";
+    }
 };
 #endif

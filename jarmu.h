@@ -9,7 +9,7 @@ private:
     String megnevezes;
     int gyartasiEv; // nem lehet < 0
     String szin;
-    int ar;           // nem lehet < 0
+    int ar;              // nem lehet < 0
     double teljesitmeny; // nem lehet < 0
 
 public:
@@ -37,5 +37,14 @@ public:
     int getAr() const { return ar; }
     void setAr(int ar) { this->ar = ar; }
     int getTeljesitmeny() const { return teljesitmeny; }
+    virtual void print() const
+    {
+        std::cout << "ID: " << id << "; ";
+        std::cout << "Megnevezes: " << megnevezes << "; ";
+        std::cout << "Gyartasi ev: " << gyartasiEv << "; ";
+        std::cout << "Szin: " << szin << "; ";
+        std::cout << "Ar: " << ar << "; ";
+        std::cout << "Teljesitmeny: " << teljesitmeny << "; ";
+    };
 };
 #endif
