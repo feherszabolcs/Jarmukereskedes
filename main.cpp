@@ -68,7 +68,16 @@ Adatkezelo<20> init()
     {
         cout << "Szeretne betolteni foldi elmentett jarmuveit? [I]-Igen [N]-Nem: ";
         cin >> load;
-        if (cin.good() && (load == 'I'))
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (cin.fail() || (toupper(load) != 'I' && toupper(load) != 'N'))
+        {
+            cin.clear();
+            cout << "Hibas valasztas! Probalja ujra!" << endl;
+            continue;
+        }
+
+        if (cin.good() && (toupper(load) == 'I'))
         {
             String filename;
             cout << "Kerem adja meg a betolteni kivant fajl nevet: ";
@@ -82,6 +91,7 @@ Adatkezelo<20> init()
                     ker.addJarmu(new FoldiJarmu(line));
                 }
                 valid = 1;
+                std::cout << "Sikeresen betoltve! - " << filename.toUpper() << std::endl;
             }
             else
             {
@@ -89,8 +99,10 @@ Adatkezelo<20> init()
                 valid = -1;
             }
         }
-        if (cin.good() && (load == 'N'))
+        if (cin.good() && (toupper(load) == 'N')){
             valid = 0;
+            cout << "Nem kerult betoltesre fajl!" << endl;
+        }
     } while (valid < 0);
     return ker;
 }

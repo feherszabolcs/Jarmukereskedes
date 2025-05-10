@@ -135,6 +135,19 @@ String *String::slice(String line, char sep)
     return res;
 }
 
+String String::toUpper() const
+{
+    String result = *this;
+    for (size_t i = 0; i < len; i++)
+    {
+        if (islower(result[i]))
+        {
+            result[i] = toupper(result[i]);
+        }
+    }
+    return result;
+}
+
 // << operátor, ami beolvas az istreamről egy szót
 std::istream &operator>>(std::istream &is, String &s0)
 {

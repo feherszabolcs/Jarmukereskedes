@@ -76,6 +76,7 @@ public:
     /// @param rhs_c - jobboldali karakter
     /// @return új String, ami tartalmazza a sztringet és a karaktert egymás után
     String operator+(char rhs_c) const { return *this + String(rhs_c); }
+    String toUpper() const;
 
     /// A string egy megadott indexű elemének REFERENCIÁJÁVAL tér vissza.
     /// @param idx - charakter indexe
