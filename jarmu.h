@@ -48,7 +48,6 @@ public:
     void setAr(int ar) { this->ar = ar; }
     int getTeljesitmeny() const { return teljesitmeny; }
     virtual void print() const
-
     {
         std::cout << "ID: " << id << "; ";
         std::cout << "Megnevezes: " << megnevezes << "; ";
@@ -57,6 +56,7 @@ public:
         std::cout << "Ar: " << ar << " ezer Ft; ";
         std::cout << "Teljesitmeny: " << teljesitmeny << " kW; ";
     };
+    virtual String GetType() = 0; // Pure virtual function
     virtual ~Jarmu() {}
 };
 #endif

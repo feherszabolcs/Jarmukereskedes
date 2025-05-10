@@ -19,7 +19,12 @@ public:
     void print() const
     {
         Jarmu::print();
-        std::cout << "Besorolas: " << besorolas << "; ";
+        std::cout << "Besorolas: " << besorolas << "; " << std::endl;
+    }
+
+    String GetType() override
+    {
+        return "Vizijarmu";
     }
 };
 #endif

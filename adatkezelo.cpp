@@ -3,6 +3,7 @@
 
 #include "adatkezelo.h"
 #include "jarmu.h"
+#include <cstring>
 
 template <size_t capacity>
 size_t Adatkezelo<capacity>::getJarmuvek()
@@ -62,6 +63,36 @@ void Adatkezelo<capacity>::printJarmuvek() const
         if (jarmuvek[i] != nullptr)
         {
             jarmuvek[i]->print();
+        }
+    }
+}
+template <size_t capacity>
+void Adatkezelo<capacity>::filterJarmuvek(String filter)
+{
+    for (size_t i = 0; i < jarmuvekSzama; i++)
+    {
+        if (jarmuvek[i] != nullptr)
+        {
+            if (jarmuvek[i]->GetType() == filter)
+            {
+                jarmuvek[i]->print();
+                std::cout << std::endl;
+            }
+        }
+    }
+}
+template <size_t capacity>
+void Adatkezelo<capacity>::searchJarmu(String filter)
+{
+    for (size_t i = 0; i < jarmuvekSzama; i++)
+    {
+        if (jarmuvek[i] != nullptr)
+        {
+            if (strstr(jarmuvek[i]->getMegnevezes().c_str(), filter.c_str()) != NULL)
+            {
+                jarmuvek[i]->print();
+                std::cout << std::endl;
+            }
         }
     }
 }

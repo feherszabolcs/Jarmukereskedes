@@ -29,5 +29,9 @@ public:
         std::cout << "Ajtok szama: " << ajtokSzama << "; ";
         std::cout << "Uzemanyag fogyasztas: " << uzemanyagFogyasztas << " l/100km " << std::endl;
     }
+    String GetType() override
+    {
+        return "Foldijarmu";
+    }
 };
 #endif

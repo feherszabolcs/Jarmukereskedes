@@ -18,13 +18,16 @@ public:
         for (size_t i = 0; i < capacity; ++i)
             jarmuvek[i] = NULL;
     }
-
+    Adatkezelo(const Adatkezelo &other);
     size_t getJarmuvek();
     void printJarmuvek() const;
     void addJarmu(Jarmu *ujJarmu);
     void removeJarmu(int id);
     // szűrő fgv. paramok alapján
-    void filterJarmuvek();
+    void filterJarmuvek(String tipus);
+    void searchJarmu(int id);
+    void searchJarmu(String megnevezes);
+
     bool toFile(const char *filename) const; // bool return value: sikeres-e a mentés
     ~Adatkezelo()
     {
