@@ -7,6 +7,13 @@
 #include "foldijarmu.hpp"
 #include "limits"
 #include <fstream>
+// Customm sleep function for Windows and Linux (source: stackoverflow- cross platform sleep in C, C++)
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#define Sleep(x) usleep((x) * 1000)
+#endif
 
 using namespace std;
 
@@ -49,7 +56,7 @@ void filter(Adatkezelo<20> &all)
         {
             cout << "Hibas valasztas! Probalja ujra!" << endl;
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
         }
     } while (!valid);
 
@@ -100,7 +107,7 @@ int mainMenu()
         {
             cout << "Hibas valasztas! Probalja ujra!" << endl;
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
         }
 
     } while (!valid);
@@ -119,7 +126,7 @@ Adatkezelo<20> init()
         cout << "Szeretne betolteni foldi elmentett jarmuveit? [I]-Igen [N]-Nem: ";
         cin >> load;
 
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore((numeric_limits<streamsize>::max)(), '\n');
         if (cin.fail() || (toupper(load) != 'I' && toupper(load) != 'N'))
         {
             cin.clear();
@@ -175,12 +182,14 @@ int main()
             break;
         case 3:
             filter(kereskedes);
+            Sleep(500);
             break;
         case 4:
             kereskedes.printJarmuvek();
             break;
         case 9:
             cout << "Kilepes..." << endl;
+            Sleep(500);
             return 0;
             break;
         default:
