@@ -168,6 +168,92 @@ Adatkezelo<20> init()
     return ker;
 }
 
+FoldiJarmu insertDialog()
+{
+    int id, gyartEV, ar, telj, ajtok, uzema;
+    String megnev, szin, rendszam;
+    cout << "--- UJ FOLDI JARMU---" << endl;
+    do
+    {
+        cout << "[ID] = ";
+        cin >> id;
+    } while (cin.fail() || id < 0);
+
+    cout << "[Megnevezes] = ";
+    cin >> megnev;
+    do
+    {
+        cout << "[Gyartasi ev] = ";
+        cin >> gyartEV;
+    } while (cin.fail() || gyartEV < 0 || gyartEV > 2050);
+    cout << "[Szin] = ";
+    cin >> szin;
+    do
+    {
+        cout << "[Ar] = ";
+        cin >> ar;
+    } while (cin.fail() || ar < 0);
+    do
+    {
+        cout << "[Teljesitmeny] = ";
+        cin >> telj;
+    } while (cin.fail() || telj < 0);
+    cout << "[Rendszam] = ";
+    cin >> rendszam;
+    do
+    {
+        cout << "[Ajtok szama] = ";
+        cin >> ajtok;
+    } while (cin.fail() || ajtok < 0);
+    do
+    {
+        cout << "[Uzemanyag fogyasztas] = ";
+        cin >> uzema;
+    } while (cin.fail() || uzema < 0);
+    FoldiJarmu *jarmu = new FoldiJarmu(id, megnev, gyartEV, szin, ar, telj, rendszam, ajtok, uzema);
+    return *jarmu;
+}
+
+void newJarmuDialog(Adatkezelo<20> &all)
+{
+    int choice = 0;
+    int numOfOptions = 2;
+    cout << "---UJ JARMU FELVETELE---" << endl;
+    cout << "1. Foldi jarmu" << endl;
+    cout << "2. Vizi jarmu" << endl;
+    cout << "8. Vissza" << endl;
+
+    bool valid = false;
+    do
+    {
+        cout << "Valasszon egy lehetoseget: ";
+        cin >> choice;
+        if (cin.good() && ((choice >= 1 && choice <= numOfOptions) || choice == 8))
+        {
+            valid = true;
+        }
+        else
+        {
+            cout << "Hibas valasztas! Probalja ujra!" << endl;
+            cin.clear();
+            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+        }
+    } while (!valid);
+
+    switch (choice)
+    {
+    case 1:
+        all.addJarmu(new FoldiJarmu(insertDialog()));
+        break;
+    case 2:
+        break;
+    case 8:
+        return;
+    default:
+        break;
+    }
+}
+
 int main()
 {
     // adatkezelo capacity kezdeti meretenek megadasa?
@@ -178,7 +264,10 @@ int main()
         switch (choice)
         {
         case 1:
-            /* code */
+            newJarmuDialog(kereskedes);
+            Sleep(500);
+            break;
+        case 2:
             break;
         case 3:
             filter(kereskedes);
@@ -186,6 +275,7 @@ int main()
             break;
         case 4:
             kereskedes.printJarmuvek();
+            Sleep(500);
             break;
         case 9:
             cout << "Kilepes..." << endl;
