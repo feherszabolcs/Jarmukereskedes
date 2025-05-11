@@ -4,6 +4,7 @@
 #include "adatkezelo.h"
 #include "jarmu.h"
 #include <cstring>
+#include <fstream>
 
 template <size_t capacity>
 size_t Adatkezelo<capacity>::getJarmuvek()
@@ -62,7 +63,7 @@ void Adatkezelo<capacity>::printJarmuvek() const
     {
         if (jarmuvek[i] != nullptr)
         {
-            jarmuvek[i]->print();
+            jarmuvek[i]->print(std::cout, true);
         }
     }
 }
@@ -75,8 +76,7 @@ void Adatkezelo<capacity>::filterJarmuvek(String filter)
         {
             if (jarmuvek[i]->GetType() == filter)
             {
-                jarmuvek[i]->print();
-                std::cout << std::endl;
+                jarmuvek[i]->print(std::cout, true) << std::endl;
             }
         }
     }
@@ -90,9 +90,27 @@ void Adatkezelo<capacity>::searchJarmu(String filter)
         {
             if (strstr(jarmuvek[i]->getMegnevezes().c_str(), filter.c_str()) != NULL)
             {
-                jarmuvek[i]->print();
+                jarmuvek[i]->print(std::cout, true);
                 std::cout << std::endl;
             }
         }
     }
+}
+template <size_t capacity>
+bool Adatkezelo<capacity>::toFile(const char *filename) const
+{
+    std::ofstream file(filename);
+    if (!file.is_open())
+    {
+        return false;
+    }
+    for (size_t i = 0; i < jarmuvekSzama; i++)
+    {
+        if (jarmuvek[i] != nullptr)
+        {
+            jarmuvek[i]->print(file, false) << std::endl;
+        }
+    }
+    file.close();
+    return true;
 }

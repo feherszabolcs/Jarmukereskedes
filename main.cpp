@@ -85,12 +85,13 @@ void filter(Adatkezelo<20> &all)
 int mainMenu()
 {
     int choice = 0;
-    int numOfOptions = 4;
+    int numOfOptions = 5;
     cout << "---JARMUKERESKEDES MENU---" << endl;
     cout << "1. Jarmu hozzaadasa" << endl;
     cout << "2. Jarmu torlese" << endl;
     cout << "3. Jarmuvek szurese" << endl;
     cout << "4. Minden jarmu megjelenitese" << endl;
+    cout << "5. Kereskedesi adatok mentese" << endl;
     cout << "9. Kilepes" << endl;
 
     bool valid = false;
@@ -338,6 +339,18 @@ int main()
             Sleep(500);
             return 0;
             break;
+        case 5:
+        {
+            cout << "Kerem adja meg a menteni kivant fajl nevet: ";
+            String filename;
+            cin >> filename;
+            if (kereskedes.toFile(filename.c_str()))
+                cout << "Sikeresen elmentve! - " << filename.toUpper() << endl;
+            else
+                cout << "Nem sikerult elmenteni!" << endl;
+            Sleep(500);
+            break;
+        }
         default:
             cout << "Hibas valasztas! Probalja ujra!" << endl;
             break;

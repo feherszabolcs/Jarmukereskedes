@@ -16,10 +16,14 @@ public:
         this->besorolas = temp[7];
     }
     String getBesorolas() const { return besorolas; }
-    void print() const
+    std::ostream &print(std::ostream &os, bool formating) const
     {
-        Jarmu::print();
-        std::cout << "Besorolas: " << besorolas << "; " << std::endl;
+        Jarmu::print(os, formating);
+        if (formating)
+            os << "Besorolas: " << besorolas << ";" << std::endl;
+        else
+            os << besorolas << ";" << "|";
+        return os;
     }
 
     String GetType() override

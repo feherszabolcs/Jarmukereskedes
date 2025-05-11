@@ -22,12 +22,16 @@ public:
     String getRendszam() const { return rendszam; }
     int getAjtokSzama() const { return ajtokSzama; }
     int getUzemanyagFogyasztas() const { return uzemanyagFogyasztas; }
-    void print() const override
+    std::ostream &print(std::ostream &os, bool formating) const override
     {
-        Jarmu::print();
-        std::cout << "Rendszam: " << rendszam << "; ";
-        std::cout << "Ajtok szama: " << ajtokSzama << "; ";
-        std::cout << "Uzemanyag fogyasztas: " << uzemanyagFogyasztas << " l/100km " << std::endl;
+        Jarmu::print(os, formating);
+        if (formating)
+            os << "Rendszam: " << rendszam << "; "
+               << "Ajtok szama: " << ajtokSzama << "; "
+               << "Uzemanyag fogyasztas: " << uzemanyagFogyasztas << " l/100km;" << std::endl;
+        else
+            os << rendszam << ";" << ajtokSzama << ";" << uzemanyagFogyasztas << ";" << "|";
+        return os;
     }
     String GetType() override
     {

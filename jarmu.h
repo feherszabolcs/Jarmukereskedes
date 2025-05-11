@@ -47,14 +47,20 @@ public:
     int getAr() const { return ar; }
     void setAr(int ar) { this->ar = ar; }
     int getTeljesitmeny() const { return teljesitmeny; }
-    virtual void print() const
+    virtual std::ostream &print(std::ostream &os, bool formating) const
     {
-        std::cout << "ID: " << id << "; ";
-        std::cout << "Megnevezes: " << megnevezes << "; ";
-        std::cout << "Gyartasi ev: " << gyartasiEv << "; ";
-        std::cout << "Szin: " << szin << "; ";
-        std::cout << "Ar: " << ar << " ezer Ft; ";
-        std::cout << "Teljesitmeny: " << teljesitmeny << " kW; ";
+        if (formating)
+        {
+            os << "ID: " << id << "; "
+               << "Megnevezes: " << megnevezes << "; "
+               << "Gyartasi ev: " << gyartasiEv << "; "
+               << "Szin: " << szin << "; "
+               << "Ar: " << ar << " ezer Ft; "
+               << "Teljesitmeny: " << teljesitmeny << " kW; ";
+        }
+        else
+            os << id << ";" << megnevezes << ";" << gyartasiEv << ";" << szin << ";" << ar << ";" << teljesitmeny << ";";
+        return os;
     };
     virtual String GetType() = 0; // Pure virtual function
     virtual ~Jarmu() {}
