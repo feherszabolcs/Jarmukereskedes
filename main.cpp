@@ -168,36 +168,80 @@ Adatkezelo<20> init()
     return ker;
 }
 
-FoldiJarmu insertDialog()
+void insertHelper(int &id, String &megnev, int &gyartEV, String &szin, int &ar, int &telj)
 {
-    int id, gyartEV, ar, telj, ajtok, uzema;
-    String megnev, szin, rendszam;
-    cout << "--- UJ FOLDI JARMU---" << endl;
+    bool valid_actual = false;
     do
     {
         cout << "[ID] = ";
         cin >> id;
-    } while (cin.fail() || id < 0);
+        if (cin.fail() || id < 0)
+        {
+            cin.clear();
+            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+            cout << "Hibas ID! Probalja ujra!" << endl;
+        }
+        else
+            valid_actual = true;
+    } while (!valid_actual);
 
     cout << "[Megnevezes] = ";
     cin >> megnev;
+    valid_actual = false;
     do
     {
         cout << "[Gyartasi ev] = ";
         cin >> gyartEV;
-    } while (cin.fail() || gyartEV < 0 || gyartEV > 2050);
+        if (cin.fail() || gyartEV < 0 || gyartEV > 2050)
+        {
+            cin.clear();
+            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+            cout << "Hibas gyartasi ev! Probalja ujra!" << endl;
+        }
+        else
+            valid_actual = true;
+    } while (!valid_actual);
     cout << "[Szin] = ";
     cin >> szin;
+    valid_actual = false;
+
     do
     {
         cout << "[Ar] = ";
         cin >> ar;
-    } while (cin.fail() || ar < 0);
+        if (cin.fail() || ar < 0)
+        {
+            cin.clear();
+            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+            cout << "Hibas ar! Probalja ujra!" << endl;
+        }
+        else
+            valid_actual = true;
+    } while (!valid_actual);
+    valid_actual = false;
+
     do
     {
         cout << "[Teljesitmeny] = ";
         cin >> telj;
-    } while (cin.fail() || telj < 0);
+        if (cin.fail() || telj < 0)
+        {
+            cin.clear();
+            cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+            cout << "Hibas teljesitmeny! Probalja ujra!" << endl;
+        }
+        else
+            valid_actual = true;
+    } while (!valid_actual);
+    valid_actual = false;
+}
+
+FoldiJarmu insertFDialog()
+{
+    int id, gyartEV, ar, telj, ajtok, uzema;
+    String megnev, szin, rendszam;
+    cout << "--- UJ FOLDI JARMU---" << endl;
+    insertHelper(id, megnev, gyartEV, szin, ar, telj);
     cout << "[Rendszam] = ";
     cin >> rendszam;
     do
@@ -210,8 +254,19 @@ FoldiJarmu insertDialog()
         cout << "[Uzemanyag fogyasztas] = ";
         cin >> uzema;
     } while (cin.fail() || uzema < 0);
-    FoldiJarmu *jarmu = new FoldiJarmu(id, megnev, gyartEV, szin, ar, telj, rendszam, ajtok, uzema);
-    return *jarmu;
+    FoldiJarmu jarmu(id, megnev, gyartEV, szin, ar, telj, rendszam, ajtok, uzema);
+    return jarmu;
+}
+Vizijarmu insertVDialog()
+{
+    int id, gyartEV, ar, telj;
+    String megnev, szin, besorol;
+    cout << "--- UJ VIZIJARMU---" << endl;
+    insertHelper(id, megnev, gyartEV, szin, ar, telj);
+    cout << "[Besorolas] = ";
+    cin >> besorol;
+    Vizijarmu jarmu(id, megnev, gyartEV, szin, ar, telj, besorol);
+    return jarmu;
 }
 
 void newJarmuDialog(Adatkezelo<20> &all)
@@ -243,9 +298,10 @@ void newJarmuDialog(Adatkezelo<20> &all)
     switch (choice)
     {
     case 1:
-        all.addJarmu(new FoldiJarmu(insertDialog()));
+        all.addJarmu(new FoldiJarmu(insertFDialog()));
         break;
     case 2:
+        all.addJarmu(new Vizijarmu(insertVDialog()));
         break;
     case 8:
         return;

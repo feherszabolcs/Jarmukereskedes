@@ -46,10 +46,11 @@ String::String(const String &s1)
 {
     // Meghatározzuk a hosszát
     len = s1.len;
-    // Helyet foglalunk
-    pData = new char[len + 1];
-    // Bemásoljuk a stringet, ami le van zárva 0-val így használható az strcpy is
-    strcpy(pData, s1.pData);
+    if (s1.pData != nullptr)
+    {
+        pData = new char[len + 1];
+        strcpy(pData, s1.pData);
+    }
 }
 
 // operator=
@@ -59,10 +60,15 @@ String &String::operator=(const String &rhs_s)
     {
         delete[] pData;
         len = rhs_s.len;
-        // Helyet foglalunk
-        pData = new char[len + 1];
-        // Bemásoljuk a stringet, ami le van zárva 0-val így használható az strcpy is
-        strcpy(pData, rhs_s.pData);
+        if (rhs_s.pData != nullptr)
+        {
+            pData = new char[len + 1];
+            strcpy(pData, rhs_s.pData);
+        }
+        else
+        {
+            pData = nullptr;
+        }
     }
     return *this;
 }
