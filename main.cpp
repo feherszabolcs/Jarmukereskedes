@@ -311,6 +311,17 @@ void newJarmuDialog(Adatkezelo<20> &all)
     }
 }
 
+void removeDialog(Adatkezelo<20> &all)
+{
+    int id;
+    cout << "Kerem adja meg a torolni kivant jarmu ID-jat: ";
+    cin >> id;
+    if (all.removeJarmu(id) == true)
+        cout << "Sikeresen torolve!" << endl;
+    else
+        cout << "Nem sikerult torolni (ID = " << id << ")!" << endl;
+}
+
 int main()
 {
     // adatkezelo capacity kezdeti meretenek megadasa?
@@ -325,6 +336,8 @@ int main()
             Sleep(500);
             break;
         case 2:
+            removeDialog(kereskedes);
+            Sleep(500);
             break;
         case 3:
             filter(kereskedes);

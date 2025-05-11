@@ -22,13 +22,14 @@ public:
     size_t getJarmuvek();
     void printJarmuvek() const;
     void addJarmu(Jarmu *ujJarmu);
-    void removeJarmu(int id);
+    bool removeJarmu(int id);
     // szűrő fgv. paramok alapján
     void filterJarmuvek(String tipus);
     void searchJarmu(int id);
-    void searchJarmu(String megnevezes);
+    void searchJarmu(String megnevezes); // TODO
 
-    bool toFile(const char *filename) const; // bool return value: sikeres-e a mentés
+    bool toFile(const char *filename) const;
+
     ~Adatkezelo()
     {
         for (size_t i = 0; i < capacity; ++i)

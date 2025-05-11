@@ -35,17 +35,19 @@ void Adatkezelo<capacity>::addJarmu(Jarmu *ujJarmu)
         throw "Hiba tortent!";
 }
 template <size_t capacity>
-void Adatkezelo<capacity>::removeJarmu(int id)
+bool Adatkezelo<capacity>::removeJarmu(int id)
 {
-    for (size_t i = 0; i < jarmuvekSzama; i++)
+    for (size_t i = 0; i < capacity; i++)
     {
         if ((jarmuvek[i])->getId() == id)
         {
+            delete jarmuvek[i];
             jarmuvek[i] = nullptr;
             jarmuvekSzama--;
-            break;
+            return true;
         }
     }
+    return false;
 }
 template <size_t capacity>
 void Adatkezelo<capacity>::printJarmuvek() const
@@ -59,7 +61,7 @@ void Adatkezelo<capacity>::printJarmuvek() const
     {
         std::cout << "---Jarmuvek:--- (" << jarmuvekSzama << " db)" << std::endl;
     }
-    for (size_t i = 0; i < jarmuvekSzama; i++)
+    for (size_t i = 0; i < capacity; i++)
     {
         if (jarmuvek[i] != nullptr)
         {
@@ -70,7 +72,7 @@ void Adatkezelo<capacity>::printJarmuvek() const
 template <size_t capacity>
 void Adatkezelo<capacity>::filterJarmuvek(String filter)
 {
-    for (size_t i = 0; i < jarmuvekSzama; i++)
+    for (size_t i = 0; i < capacity; i++)
     {
         if (jarmuvek[i] != nullptr)
         {
@@ -84,7 +86,7 @@ void Adatkezelo<capacity>::filterJarmuvek(String filter)
 template <size_t capacity>
 void Adatkezelo<capacity>::searchJarmu(String filter)
 {
-    for (size_t i = 0; i < jarmuvekSzama; i++)
+    for (size_t i = 0; i < capacity; i++)
     {
         if (jarmuvek[i] != nullptr)
         {
@@ -104,7 +106,7 @@ bool Adatkezelo<capacity>::toFile(const char *filename) const
     {
         return false;
     }
-    for (size_t i = 0; i < jarmuvekSzama; i++)
+    for (size_t i = 0; i < capacity; i++)
     {
         if (jarmuvek[i] != nullptr)
         {
