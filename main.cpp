@@ -124,7 +124,7 @@ Adatkezelo<20> init()
     Adatkezelo<20> ker;
     do
     {
-        cout << "Szeretne betolteni foldi elmentett jarmuveit? [I]-Igen [N]-Nem: ";
+        cout << "Szeretne betolteni elmentett jarmuveit? [I]-Igen [N]-Nem: ";
         cin >> load;
 
         cin.ignore((numeric_limits<streamsize>::max)(), '\n');
@@ -317,9 +317,11 @@ void removeDialog(Adatkezelo<20> &all)
     cout << "Kerem adja meg a torolni kivant jarmu ID-jat: ";
     cin >> id;
     if (all.removeJarmu(id) == true)
-        cout << "Sikeresen torolve!" << endl;
-    else
-        cout << "Nem sikerult torolni (ID = " << id << ")!" << endl;
+    {
+        cout << "Sikeresen torolve (ID = " << id << ")!" << endl;
+        return;
+    }
+    cout << "Nem sikerult torolni (ID = " << id << ")!" << endl;
 }
 
 int main()

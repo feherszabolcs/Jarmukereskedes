@@ -39,7 +39,7 @@ bool Adatkezelo<capacity>::removeJarmu(int id)
 {
     for (size_t i = 0; i < capacity; i++)
     {
-        if ((jarmuvek[i])->getId() == id)
+        if (jarmuvek[i] != nullptr && (jarmuvek[i])->getId() == id)
         {
             delete jarmuvek[i];
             jarmuvek[i] = nullptr;
