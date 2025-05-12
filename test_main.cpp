@@ -1,5 +1,5 @@
 #include "gtest_lite.h"
-#include "adatkezelo.h"
+#include "adatkezelo.hpp"
 #include "jarmu.h"
 #include "foldijarmu.hpp"
 

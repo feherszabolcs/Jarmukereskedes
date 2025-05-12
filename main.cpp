@@ -1,7 +1,6 @@
 #include <iostream>
 #include "string5.h"
-#include "adatkezelo.h"
-#include "adatkezelo.cpp"
+#include "adatkezelo.hpp"
 #include "jarmu.h"
 #include "vizijarmu.hpp"
 #include "foldijarmu.hpp"
