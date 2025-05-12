@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include "memtrace.h"
 
 template <size_t capacity = 20>
 class Adatkezelo

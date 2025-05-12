@@ -2,6 +2,7 @@
 #define FOLDIJARMU_HPP
 #include "jarmu.h"
 #include "string5.h"
+#include "memtrace.h"
 
 class FoldiJarmu : public Jarmu
 {

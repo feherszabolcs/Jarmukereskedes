@@ -6,6 +6,7 @@
 #include "foldijarmu.hpp"
 #include "limits"
 #include <fstream>
+#include "memtrace.h"
 // Customm sleep function for Windows and Linux (source: stackoverflow- cross platform sleep in C, C++)
 #ifdef _WIN32
 #include <windows.h>

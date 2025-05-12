@@ -1,6 +1,7 @@
 #ifndef JARMU_H
 #define JARMU_H
 #include "string5.h"
+#include "memtrace.h"
 
 class Jarmu
 {

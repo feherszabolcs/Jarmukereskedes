@@ -6,8 +6,9 @@
 #include "string5.h"
 #include <iostream>
 #include <fstream>
+#include "memtrace.h"
 
-int test_main()
+void test_main()
 {
     TEST(Peldanyositas, Jarmupeldany)
     {
