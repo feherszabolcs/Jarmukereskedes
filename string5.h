@@ -65,17 +65,39 @@ public:
     /// @return új String, ami tartalmazza a két stringet egmás után
     String operator+(const String &rhs_s) const;
 
+    /// Kapott string feldarabolasa egy adott karakter menten
+    /// @param line - a feldarabolandó string
+    /// @param sep - a feldaraboláshoz elvalaszto használt karakter
+    /// @return String tomb, ami tartalmazza a feldarabolt stringeket
     String *slice(String line, char sep);
 
+    /// Két String egyenlő-e
+    /// @param rhs_s - jobboldali String
+    /// @return true, ha a két string egyenlő, false egyébként
     bool operator==(const String &rhs_s) const;
+
+    /// String és char* egyenlő-e
+    /// @param rhs_c - jobboldali char*
+    /// @return true, ha a két string egyenlő, false egyébként
     bool operator==(const char *rhs_c) const { return *this == String(rhs_c); }
+
+    /// Két String nem egyenlő
+    /// @param rhs_s - jobboldali String
+    /// @return true, ha a két string nem egyenlő, false egyébként
     bool operator!=(const String &rhs_s) const { return !(*this == rhs_s); }
+
+    /// String és char* nem egyenlő
+    /// @param rhs_c - jobboldali char*
+    /// @return true, ha a két string nem egyenlő, false egyébként
     bool operator!=(const char *rhs_c) const { return !(*this == String(rhs_c)); }
 
     /// Sztrinhez karaktert összefűz
     /// @param rhs_c - jobboldali karakter
     /// @return új String, ami tartalmazza a sztringet és a karaktert egymás után
     String operator+(char rhs_c) const { return *this + String(rhs_c); }
+
+    /// String nagybetűssé alakítása
+    /// @return String, ami tartalmazza a sztringet nagybetűssé alakítva
     String toUpper() const;
 
     /// A string egy megadott indexű elemének REFERENCIÁJÁVAL tér vissza.

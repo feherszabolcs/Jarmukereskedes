@@ -15,16 +15,22 @@ private:
     size_t jarmuvekSzama;
 
 public:
+    // Alap konstruktor
     Adatkezelo()
     {
         jarmuvekSzama = 0;
         for (size_t i = 0; i < capacity; ++i)
             jarmuvek[i] = NULL;
     }
+
+    /// Jarmuvek szama
+    ///@return: jarmuvek szama
     size_t getJarmuvek()
     {
         return this->jarmuvekSzama;
     }
+
+    /// Jarmuvek kiiratasa
     void printJarmuvek() const
     {
         if (jarmuvekSzama == 0)
@@ -44,6 +50,9 @@ public:
             }
         }
     }
+
+    /// Jarmu hozzaadasa, ha van meg hely
+    ///@param jarmu: uj jarmu pointer
     void addJarmu(Jarmu *ujJarmu)
     {
         if (jarmuvekSzama > capacity)
@@ -66,6 +75,10 @@ public:
         else
             throw "Hiba tortent!";
     }
+
+    /// Jarmu torlese
+    ///@param id: torolni kivant jarmu id-je
+    ///@return: sikeres-e a torles
     bool removeJarmu(int id)
     {
         for (size_t i = 0; i < capacity; i++)
@@ -80,7 +93,9 @@ public:
         }
         return false;
     }
-    // szűrő fgv. paramok alapján
+
+    /// Jarmuvek szurt kiirasa a cout-ra
+    ///@param filter: szurt jarmuvek tipusa
     void filterJarmuvek(String filter)
     {
         for (size_t i = 0; i < capacity; i++)
@@ -94,6 +109,9 @@ public:
             }
         }
     }
+
+    /// Jarmu keresese megnevezes mezo alapjan
+    ///@param filter: keresett jarmu neve
     void searchJarmu(String filter)
     {
         for (size_t i = 0; i < capacity; i++)
@@ -109,6 +127,9 @@ public:
         }
     }
 
+    /// Jarmuvek kiirasa egy fajlba (ha nem letezo fajl, letrehozza)
+    ///@param filename: fajl neve
+    ///@return: sikeres-e a kiiras
     bool toFile(const char *filename) const
     {
         std::ofstream file(filename);
@@ -127,6 +148,7 @@ public:
         return true;
     }
 
+    /// Destruktor, ha van jarmu, akkor torli, felszabaditja
     ~Adatkezelo()
     {
         for (size_t i = 0; i < capacity; ++i)

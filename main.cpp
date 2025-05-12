@@ -16,6 +16,9 @@
 
 using namespace std;
 
+/// Sor olvasasa a fajlbol
+///@param is: bemeneti streame
+///@param result: beolvasott String
 istream &readLine(istream &is, String &result)
 {
     char ch;
@@ -32,6 +35,8 @@ istream &readLine(istream &is, String &result)
     return is;
 }
 
+/// Jarmuvek szureset kezelo fgv.
+///@param all: jarmuvek adatait tartalmazo adatkezelo objektum
 void filter(Adatkezelo<20> &all)
 {
     cout << "---SZURESI LEHETOSEGEK---" << endl;
@@ -81,6 +86,8 @@ void filter(Adatkezelo<20> &all)
     }
 }
 
+/// Fomenut megjelenito fgv.
+///@return: a valasztott menupont szama
 int mainMenu()
 {
     int choice = 0;
@@ -115,6 +122,9 @@ int mainMenu()
     return choice;
 }
 
+/// Az adatkezelo objektumot inicializalo fgv.
+/// Szukseg eseten a fajlbol olvas kezdeti allapothoz
+///@return: az adatkezelo objektum
 Adatkezelo<20> init()
 {
     cout << "---JARMUKERESKEDES---" << endl;
@@ -143,7 +153,7 @@ Adatkezelo<20> init()
             if (file.is_open())
             {
                 String line;
-                while (readLine(file, line)) // TODO.
+                while (readLine(file, line))
                 {
                     if (line.slice(line, ';')[7] == "-")
                         ker.addJarmu(new FoldiJarmu(line));
@@ -168,6 +178,7 @@ Adatkezelo<20> init()
     return ker;
 }
 
+/// Segedfuggveny, sablon a jarmu felvetelehez
 void insertHelper(int &id, String &megnev, int &gyartEV, String &szin, int &ar, int &telj)
 {
     bool valid_actual = false;
@@ -236,6 +247,8 @@ void insertHelper(int &id, String &megnev, int &gyartEV, String &szin, int &ar, 
     valid_actual = false;
 }
 
+/// Foldijarmu felvetele
+///@return: a felvetelt jarmu adatait tartalmazo jarmu objektum
 FoldiJarmu insertFDialog()
 {
     int id, gyartEV, ar, telj, ajtok, uzema;
@@ -257,6 +270,9 @@ FoldiJarmu insertFDialog()
     FoldiJarmu jarmu(id, megnev, gyartEV, szin, ar, telj, rendszam, ajtok, uzema);
     return jarmu;
 }
+
+/// Vizijarmu felvetele
+///@return: a felvetelt jarmu adatait tartalmazo jarmu objektum
 Vizijarmu insertVDialog()
 {
     int id, gyartEV, ar, telj;
@@ -269,6 +285,8 @@ Vizijarmu insertVDialog()
     return jarmu;
 }
 
+/// Jarmu felvetelet kezelo menu
+///@param all: a jarmuvek adatait tarolo objektum
 void newJarmuDialog(Adatkezelo<20> &all)
 {
     int choice = 0;
@@ -310,6 +328,8 @@ void newJarmuDialog(Adatkezelo<20> &all)
     }
 }
 
+/// Jarmu torleset kezelo menu
+///@param all: a jarmuvek adatait tarolo objektum
 void removeDialog(Adatkezelo<20> &all)
 {
     int id;
@@ -323,6 +343,8 @@ void removeDialog(Adatkezelo<20> &all)
     cout << "Nem sikerult torolni (ID = " << id << ")!" << endl;
 }
 
+/// A program fomenuje, minden felhasznaloi input kezelese
+///@return 0, ha a program bezarasara kerult
 int main()
 {
     // adatkezelo capacity kezdeti meretenek megadasa?
