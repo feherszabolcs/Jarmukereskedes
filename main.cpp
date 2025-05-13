@@ -179,15 +179,21 @@ Adatkezelo<20> init()
     return ker;
 }
 
+bool isValidNumber(String &in)
+{
+    if (atoi(in.c_str()) <= 0)
+        return false;
+    return true;
+}
 /// Segedfuggveny, sablon a jarmu felvetelehez
-void insertHelper(int &id, String &megnev, int &gyartEV, String &szin, int &ar, int &telj)
+void insertHelper(String &id, String &megnev, String &gyartEV, String &szin, String &ar, String &telj)
 {
     bool valid_actual = false;
     do
     {
         cout << "[ID] = ";
         cin >> id;
-        if (cin.fail() || id < 0)
+        if ((isValidNumber(id) == false))
         {
             cin.clear();
             cin.ignore((numeric_limits<streamsize>::max)(), '\n');
@@ -204,7 +210,7 @@ void insertHelper(int &id, String &megnev, int &gyartEV, String &szin, int &ar, 
     {
         cout << "[Gyartasi ev] = ";
         cin >> gyartEV;
-        if (cin.fail() || gyartEV < 0 || gyartEV > 2050)
+        if (isValidNumber(gyartEV) == false || atoi(gyartEV.c_str()) > 2022)
         {
             cin.clear();
             cin.ignore((numeric_limits<streamsize>::max)(), '\n');
@@ -221,7 +227,7 @@ void insertHelper(int &id, String &megnev, int &gyartEV, String &szin, int &ar, 
     {
         cout << "[Ar] = ";
         cin >> ar;
-        if (cin.fail() || ar < 0)
+        if (isValidNumber(ar) == false)
         {
             cin.clear();
             cin.ignore((numeric_limits<streamsize>::max)(), '\n');
@@ -236,7 +242,7 @@ void insertHelper(int &id, String &megnev, int &gyartEV, String &szin, int &ar, 
     {
         cout << "[Teljesitmeny] = ";
         cin >> telj;
-        if (cin.fail() || telj < 0)
+        if (isValidNumber(telj) == false)
         {
             cin.clear();
             cin.ignore((numeric_limits<streamsize>::max)(), '\n');
@@ -252,7 +258,7 @@ void insertHelper(int &id, String &megnev, int &gyartEV, String &szin, int &ar, 
 ///@return: a felvetelt jarmu adatait tartalmazo jarmu objektum
 FoldiJarmu insertFDialog()
 {
-    int id, gyartEV, ar, telj, ajtok, uzema;
+    String id, gyartEV, ar, telj, ajtok, uzema;
     String megnev, szin, rendszam;
     cout << "--- UJ FOLDI JARMU---" << endl;
     insertHelper(id, megnev, gyartEV, szin, ar, telj);
@@ -262,13 +268,13 @@ FoldiJarmu insertFDialog()
     {
         cout << "[Ajtok szama] = ";
         cin >> ajtok;
-    } while (cin.fail() || ajtok < 0);
+    } while (isValidNumber(ajtok) == false);
     do
     {
         cout << "[Uzemanyag fogyasztas] = ";
         cin >> uzema;
-    } while (cin.fail() || uzema < 0);
-    FoldiJarmu jarmu(id, megnev, gyartEV, szin, ar, telj, rendszam, ajtok, uzema);
+    } while (isValidNumber(uzema) == false);
+    FoldiJarmu jarmu(atoi(id.c_str()), megnev, atoi(gyartEV.c_str()), szin, atoi(ar.c_str()), atoi(telj.c_str()), rendszam, atoi(ajtok.c_str()), atoi(uzema.c_str()));
     return jarmu;
 }
 
@@ -276,13 +282,13 @@ FoldiJarmu insertFDialog()
 ///@return: a felvetelt jarmu adatait tartalmazo jarmu objektum
 Vizijarmu insertVDialog()
 {
-    int id, gyartEV, ar, telj;
+    String id, gyartEV, ar, telj;
     String megnev, szin, besorol;
     cout << "--- UJ VIZIJARMU---" << endl;
     insertHelper(id, megnev, gyartEV, szin, ar, telj);
     cout << "[Besorolas] = ";
     cin >> besorol;
-    Vizijarmu jarmu(id, megnev, gyartEV, szin, ar, telj, besorol);
+    Vizijarmu jarmu(atoi(id.c_str()), megnev, atoi(gyartEV.c_str()), szin, atoi(ar.c_str()), atoi(telj.c_str()), besorol);
     return jarmu;
 }
 
