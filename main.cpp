@@ -17,6 +17,13 @@
 
 using namespace std;
 
+bool isValidNumber(String &in)
+{
+    if (atoi(in.c_str()) <= 0)
+        return false;
+    return true;
+}
+
 /// Sor olvasasa a fajlbol
 ///@param is: bemeneti streame
 ///@param result: beolvasott String
@@ -91,7 +98,7 @@ void filter(Adatkezelo<20> &all)
 ///@return: a valasztott menupont szama
 int mainMenu()
 {
-    int choice = 0;
+    String choice;
     int numOfOptions = 5;
     cout << "---JARMUKERESKEDES MENU---" << endl;
     cout << "1. Jarmu hozzaadasa" << endl;
@@ -107,7 +114,7 @@ int mainMenu()
     {
         cout << "Valasszon egy lehetoseget: ";
         cin >> choice;
-        if (cin.good() && ((choice >= 1 && choice <= numOfOptions) || choice == 9))
+        if (isValidNumber(choice) == true && ((atoi(choice.c_str()) >= 1 && atoi(choice.c_str()) <= numOfOptions) || atoi(choice.c_str()) == 9))
         {
             valid = true;
         }
@@ -120,7 +127,7 @@ int mainMenu()
 
     } while (!valid);
 
-    return choice;
+    return atoi(choice.c_str());
 }
 
 /// Az adatkezelo objektumot inicializalo fgv.
@@ -177,13 +184,6 @@ Adatkezelo<20> init()
         }
     } while (valid < 0);
     return ker;
-}
-
-bool isValidNumber(String &in)
-{
-    if (atoi(in.c_str()) <= 0)
-        return false;
-    return true;
 }
 /// Segedfuggveny, sablon a jarmu felvetelehez
 void insertHelper(String &id, String &megnev, String &gyartEV, String &szin, String &ar, String &telj)
